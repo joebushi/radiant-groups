@@ -1,0 +1,46 @@
+/**************************************************************************************
+Dashboard
+**************************************************************************************/
+
+#dashboard {
+
+}
+
+    #dashboard h2 {
+      float: left;
+      margin: 15px 0 0 10px;
+    }
+
+    #dashboard-left {
+      float: left;
+      width: 50%;
+    }
+
+    #dashboard-right {
+      float: left;
+      width: 50%;
+    }
+
+        #dashboard-block {
+
+        }
+
+            #dashboard img {
+              float: left;
+            }
+
+            #dashboard ul {
+              clear: both;
+              padding: 10px 0 0 10px;
+            }
+
+                #dashboard ul li {
+                  clear: both;
+                  list-style: none;
+                }
+
+                    #dashboard ul li span {
+                      float: left;
+                      display: block;
+                      width: 220px;
+                    }

@@ -1,0 +1,41 @@
+:javascript
+  function extensionChange(value) {
+    if (value == '') {
+      document.getElementById('url').value = ''; 
+      document.getElementById('url').disabled = false;
+      document.getElementById('name').value = ''; 
+      document.getElementById('name').disabled = false;
+    } else {
+      document.getElementById('url').value = value; 
+      document.getElementById('url').disabled = true;
+      document.getElementById('name').value = '';
+      document.getElementById('name').disabled = true;
+    }    
+  }
+
+%table.fieldset{:cellpadding=>0, :cellspacing=>0, :border=>0}
+  %tr
+    %th.label
+      %label{:for=>"name"} Name
+    %td.field
+      = select_tag :extension, "<option></option>" + options_from_collection_for_select(admin.tabs, :url, :name), "onChange" => "extensionChange(this.value);"
+      or type the menu name
+      = text_field_tag :name, nil, :maxlength => 40
+    %td.help
+      Use an existing extension or enter the name.
+  %tr
+    %th.label
+      %label{:for=>"url"} Url
+    %td.field
+      = text_field_tag :url, nil, :class => "textbox", :maxlength => 40
+    %td.help
+      Redirect user to url (a menu could not have url).
+  %tr
+    %th.label
+      %label{:for=>"description"} Description
+    %td.field
+      = text_field_tag :description, nil, :class => "textbox", :maxlength => 255
+    %td.help
+    
+%p.buttons
+  = submit_tag "Create", :class => "button"

@@ -1,0 +1,68 @@
+%h1 Edit
+      
+- form_for :group, @group, :url => group_edit_path do |f|
+  %table.fieldset{:cellpadding=>0, :cellspacing=>0, :border=>0}
+    = render :partial => "form", :locals => {:f => f}
+    %tr
+      %th.label
+        %label{:for=>"group_description"} Description
+      %td.field
+        = f.text_field :description, :class => "textbox", :maxlength => 255
+      %td.help
+        Description will be use to not confuse groups name.
+    %tr
+      %th.label
+        %label{:for=>"admin"} Type
+      %td.field{:style=>"text-align: left;"}
+        = f.check_box "admin"
+        check to assign users as backend users
+      %td.help
+      
+  %p.buttons
+    = f.submit "Update", :class => "button"
+
+%br    
+%h2 Manage users
+
+%table{:class => "index", :cellspacing => "0"}
+  %thead
+    %tr
+      %th Name
+      %th Login
+      %th Remove
+  %tbody
+    - @group.users.each do |user|
+      %tr[user]
+        %td= user.name
+        %td= user.login
+        %td= link_to image("remove.png", :alt => "Remove"), group_remove_user_url(:id => @group.id, :user_id => user.id), :title => 'Remove user'
+            
+- form_for :groups_users, @groups_users, :url => group_add_user_url(:id => params[:id]) do |f|
+  %label{:for=>"group_user"} User
+  = select "groups_users", "user_id", User.find(:all).map { |s| [s.name, s.id] }
+  
+  %p.buttons
+    = f.submit "Add", :class => "button"
+
+%br   
+%h2 Manage menus
+
+%table{:class => "index", :cellspacing => "0"}
+  %thead
+    %tr
+      %th Name
+      %th Description
+      %th Remove
+  %tbody
+    - @group.menus.each do |menu|
+      %tr[menu]
+        %td= menu.name
+        %td= menu.description
+        %td= link_to image("remove.png", :alt => "Remove"), group_remove_menu_url(:id => @group.id, :menu_id => menu.id), :title => 'Remove menu'
+          
+- form_for :groups_menus, @groups_menus, :url => group_add_menu_url(:id => params[:id]) do |f|
+  %label{:for=>"group_user"} Menu
+  = select "groups_menus", "menu_id", Menu.find(:all, :conditions => { :parent_id => nil }).map { |s| [s.name + ' (' + s.description + ')', s.id] }
+  
+  %p.buttons
+    = f.submit "Add", :class => "button"

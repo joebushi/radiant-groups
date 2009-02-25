@@ -1,0 +1,31 @@
+%h1 Dashboard
+
+#dashboard
+  #dashboard-left
+    #dashboard-block
+      %h2 Informations
+      %ul
+        %li
+          %span
+            Number of published pages :
+          = @informations["publish_page"]
+        %li
+          %span
+            Number of draft pages :
+          = @informations["draft_page"]
+        %li
+          %span
+            Number of groups :
+          = @informations["group_number"]
+        %li
+          %span
+            Number of users :
+          = @informations["user_number"]
+
+  #dashboard-right
+    #dashboard-block
+      %h2 Pages recently updated
+      %ul
+        - @recently_updated.each do |page|
+          %li
+            =link_to page.title, page_edit_url(page.id)

@@ -1,0 +1,31 @@
+%h1 Menus builder
+
+%table.index
+  %thead
+    %tr
+      %th Name
+      %th Description
+      %th Url
+      %th Modify
+  %tbody
+    - for parent_menu in @parent_menus
+      %tr
+        %td 
+          = link_to parent_menu.name, edit_menu_path(:id => parent_menu)
+        %td 
+          = parent_menu.description
+        %td
+          - if parent_menu.dynamic?
+            dynamic
+          - else
+            - unless parent_menu.url.empty?
+              = parent_menu.url
+            - else
+              none
+        %td 
+          = link_to "remove", remove_menu_path(:id => parent_menu)
+        
+%h2 Add a new menu
+  
+- form_tag add_menu_path(:id => params[:id])  do
+  = render :partial => "form"

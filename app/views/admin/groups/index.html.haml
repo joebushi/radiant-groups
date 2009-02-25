@@ -1,0 +1,35 @@
+%h1 Groups
+
+%table{:class => "index", :cellspacing => "0"}
+  %thead
+    %tr
+      %th Name
+      %th Key
+      %th Description
+      %th Type
+      %th Remove
+  %tbody
+    - @groups.each do |group|
+      %tr[group]
+        %td= link_to group.name, group_edit_url(:id => group.id), :title => 'Edit ' + group.name
+        %td= group.key
+        %td= group.description
+        %td
+          - if group.admin?
+            backend users
+          - else
+            frontend users
+        %td
+          - if group.deletable?
+            = link_to image("remove", :alt => "Remove"), group_remove_url(:id => group.id), :title => 'Remove group'
+          - else
+            = image('remove-disabled', :alt => 'Remove')
+%h2 Create a new group
+            
+- form_for :group, @group, :url => group_new_path do |f|
+  %table.fieldset{:cellpadding=>0, :cellspacing=>0, :border=>0}
+    = render :partial => "form", :locals => {:f => f}
+  
+  %p.buttons
+    = f.submit "Create", :class => "button"
+  

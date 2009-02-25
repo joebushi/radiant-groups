@@ -1,0 +1,14 @@
+%tr
+  %th.label
+    %label{:for=>"group_name"} Name
+  %td.field
+    = f.text_field :name, :class => "textbox", :maxlength => 40
+  %td.help
+    Group name.
+%tr
+  %th.label
+    %label{:for=>"group_key"} Key
+  %td.field
+    = f.text_field :key, :class => "textbox", :maxlength => 40
+  %td.help
+    Key has to be uniq (it could be use to restrict access to the 'key' group).

@@ -1,0 +1,27 @@
+%h1
+  = "Edit menu : " + @parent_menu.name
+  
+%h2 Submenu list
+
+%table.index
+  %thead
+    %tr
+      %th Name
+      %th Description
+      %th Modify
+  %tbody
+    -for submenu in @submenus
+      %tr
+        %td
+          = submenu.name
+        %td
+          = submenu.description
+        %td
+          = link_to image('remove', :alt => 'Remove'), remove_submenu_path(:id => submenu)
+          = link_to image('move_higher', :alt => 'Up'), move_up_submenu_path(:id => submenu)
+          = link_to image('move_lower', :alt => 'Down'), move_down_submenu_path(:id => submenu)
+
+%h2 Add a submenu
+
+- form_tag add_submenu_path(:id => params[:id])  do
+  = render :partial => "form"

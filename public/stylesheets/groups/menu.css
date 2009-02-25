@@ -1,0 +1,37 @@
+#navigation {
+  margin: 18px 0 -6px 0; padding:0 0 0 20px;
+}
+
+ul#main-menu, ul#main-menu ul{
+  margin: -9px 0 0 0; padding: 0 0 15px 0 !important; padding: 0 0 14px 0 !important!;
+  list-style: none;
+  position: relative;
+}
+
+  ul#main-menu a, ul#main-menu a:visited {
+    display: block;
+    margin: 1px 0 0 0 !important; margin:0 !important!;  padding: 8px 10px;
+  }
+
+  ul#main-menu li{
+    float: left;
+    position: relative;
+    margin: 0 4px 0 0;
+  }
+
+    ul#main-menu ul {
+      position: absolute;
+      margin: 0;
+      display: none;
+      width: 12em;
+    }
+
+      ul#main-menu li ul a, ul#main-menu li ul a:visited {
+        text-align: left;
+        margin: 0 0 0 0 !important; margin: 0 0 0 0 !important!;
+        width: 12em;
+      }
+
+  ul#main-menu li:hover ul {
+    display: block;
+  }

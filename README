@@ -1,0 +1,66 @@
+== Groups
+
+1. Dashboard
+This part shows informations on you application like number of users,
+number of groups, last modified pages, etc...
+By default when you log in the admin you are redirected to the dashboard.
+
+2. Groups and Menus
+This part allow admins to create groups, link users to groups and manage
+access to every extensions.
+Admins will be able to build menu tabs (with submenus) in the admin back-end.
+By default 3 groups are created : Developer, Admin and User.
+Each user has only one group. The default group is configured in the settings,
+at first the default group is "User" (which has no backend access).
+When you remove a user from a group this user will be automatically assigned
+to the default group.
+Admin can also enable/disable users.
+
+
+== Requirements
+
+Radiant CMS 0.7.1
+
+
+== How it works ?
+
+Groups extension is keeping the current way of restricting backend access,
+example :
+  $ only_allow_access_to :index, :new, :edit, :remove, (write your own views)
+  $   :when => :admin,
+  $   :denied_url => {:controller => 'dashboard', :action => :index},
+  $   :denied_message => 'You must have administrative privileges to perform this action.'
+But a part of the authorization process has been overwrite. 'Developer' and 'Admin'
+are not used any more, the equivalent is present in 'Groups' and 'Menus' menus.
+The Radiant core doesn't need to be updated, but be careful to update the
+controllers from external extensions with the code present above.
+
+
+== Why using Groups extension ?
+
+In some projects you need more than two groups (Admin and Developer by default)
+which have backend restricted access.
+'Administrators' group need a full access, 'commercials' group need to access
+to some extension, the 'designs' groups need only access to 'snippets' and
+'layouts' etc... Groups extension allow you to manage users access to extensions
+according to their groups.
+
+
+== Installation
+
+1. Run extension migration
+
+  $ rake radiant:extensions:groups:migrate
+
+  To go back into migration number do :
+  $ rake radiant:extensions:groups:migrate VERSION=0
+
+2. Send files to your public folder (images and stylesheets)
+
+  $ rake radiant:extensions:groups:update
+
+
+== Contributors
+
+Vincent Peres
+Koonen Limited

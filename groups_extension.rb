@@ -3,7 +3,7 @@ require_dependency 'application'
 class GroupsExtension < Radiant::Extension
   version "0.1"
   description "Allow you to manage backend restrictions."
-  url "http://github.com/Koonen/radiant-groups/tree/master"
+  url "http://github.com/vincentp/radiant-groups/tree/master"
   
   define_routes do |map|
     # Groups module
